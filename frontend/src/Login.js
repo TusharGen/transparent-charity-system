@@ -9,13 +9,13 @@ function Login() {
             password: ''
         }
     )
-    const [errors,setErrors]=useState({})
-    const handleSubmit=(event)=>{
+    const [errors, setErrors] = useState({})
+    const handleSubmit = (event) => {
         event.preventDefault();
         setErrors(Validation(values))
     }
-    const handleInput=(event)=>{
-        setValues(prev=>({...prev,[event.target.name]:[event.target.value]}))
+    const handleInput = (event) => {
+        setValues(prev => ({ ...prev, [event.target.name]: [event.target.value] }))
     }
     return (
         <div className='d-flex justify-content-center align-items-center bg-primary vh-100'>
@@ -25,10 +25,12 @@ function Login() {
                     <div className='mb-3'>
                         <label htmlFor="email"><strong>Email</strong></label>
                         <input type="email" onChange={handleInput} placeholder='Enter Email' name='email' className='form-control rounded-0'></input>
+                        {errors.email && <span className='text-danger'>{errors.email}</span>}
                     </div>
                     <div className='mb-3'>
                         <label htmlFor="password"><strong>Password</strong></label>
                         <input type="password" onChange={handleInput} placeholder='Enter Password' name='password' className='form-control rounded-0'></input>
+                        {errors.password && <span className='text-danger'>{errors.password}</span>}
                     </div>
                     <button type='submit' className='btn btn-success w-100 rounded-0'>Log in</button>
                     <p>You agree to out terms and policies.</p>
