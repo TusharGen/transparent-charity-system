@@ -23,7 +23,7 @@ contract TransparentCharity {
         string image;
         uint256 goalAmount;
         uint256 currentAmount;
-        uint deadline;
+        uint256 deadline;
         bool isActive;
         address[] donators;
         uint256[] donations;
@@ -360,9 +360,8 @@ contract TransparentCharity {
         //     beneficiaries[msg.sender].Address == _beneficiary,
         //     "Only beneficiary can create a project."
         // );
-
-        uint256 goalAmountWei = _goalAmount * 1 ether;
-
+        require(_deadline < block.timestamp, "The deadline should be a date in the future.");
+        
 
         CharityProject memory project;
         project.name = beneficiaries[msg.sender].name;
@@ -370,7 +369,7 @@ contract TransparentCharity {
         project.desc = _desc;
         project.image = _image;
         project.beneficiary = payable(msg.sender);
-        project.goalAmount = goalAmountWei;
+        project.goalAmount = _goalAmount;
         project.currentAmount = 0;
         project.deadline = _deadline;
         project.isActive = false;
@@ -569,9 +568,22 @@ contract TransparentCharity {
         emit CharityProjectUpdated(projectId, project.isActive);
     }
 
+    function checkProjectCompletion(uint256 projectId) external {
+        require(projectId < charityProjects.length, "Invalid project ID");
+
+        CharityProject storage project = charityProjects[projectId];
+
+        require(project.isActive, "Project is already inactive");
+
+        if (project.currentAmount == project.goalAmount) {
+            project.isActive = false;
+        }
+    }
+
     // Function to get the status and progress of an ongoing project
     function getProjectStatus(uint256 projectId)
         external
+        view
         returns (
             string memory,
             string memory,
@@ -587,10 +599,6 @@ contract TransparentCharity {
         require(projectId < charityProjects.length, "Invalid project ID.");
 
         CharityProject storage project = charityProjects[projectId];
-
-        if (project.currentAmount == project.goalAmount) {
-            project.isActive = false;
-        }
 
         return (
             project.name,

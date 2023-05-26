@@ -7,7 +7,7 @@ import { EditionMetadataWithOwnerOutputSchema } from '@thirdweb-dev/sdk';
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
-  const { contract } = useContract('0x3703F4412Fa17BA5FCd301B2b731a7969f1fc7A6');
+  const { contract } = useContract('0x1fC511Eec6Dd28D245B4bb1D693bbDaB9dD21258');
   const { mutateAsync: createCharityProject } = useContractWrite(contract, 'createCharityProject');
 
   const address = useAddress();
@@ -32,20 +32,21 @@ export const StateContextProvider = ({ children }) => {
   }
 
   const getCharityProjects = async () => {
-    const campaigns = await contract.call('getCharityProjects');
+    const charityProjects = await contract.call('getApprovedProjects');
 
-    const parsedCampaings = campaigns.map((campaign, i) => ({
-      owner: campaign.owner,
-      title: campaign.title,
-      description: campaign.description,
-      target: ethers.utils.formatEther(campaign.target.toString()),
-      deadline: campaign.deadline.toNumber(),
-      amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
-      image: campaign.image,
-      pId: i
+    const parsedCharityProjects = charityProjects.map((charityProject, i) => ({
+      beneficiary: charityProject.beneficiary,
+      name: charityProject.name,
+      title: charityProject.title,
+      description: charityProject.desc,
+      image: charityProject.image,
+      goalAmount: ethers.utils.formatEther(charityProject.goalAmount.toString()),
+      currentAmount: ethers.utils.formatEther(charityProject.currentAmount.toString()),
+      deadline: charityProject.deadline.toNumber(),
+      projectId: i
     }));
 
-    return parsedCampaings;
+    return parsedCharityProjects;
   }
 
   const getUserCampaigns = async () => {

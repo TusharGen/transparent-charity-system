@@ -1,7 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { CampaignDetails, CreateCharityProject, Home, Profile } from "./pages";
+import { CampaignDetails, Home, Profile } from "./pages";
+import CreateCharityProject from './pages/beneficiary/CreateCharityProject';
 
 import BenDashLayout  from './pages/beneficiary/BenDashLayout';
 import DonorDashLayout from './pages/donor/DonorDashLayout';
