@@ -23,7 +23,7 @@ contract TransparentCharity {
         string image;
         uint256 goalAmount;
         uint256 currentAmount;
-        uint256 deadline;
+        //uint256 deadline;
         bool isActive;
         address[] donators;
         uint256[] donations;
@@ -353,15 +353,12 @@ contract TransparentCharity {
         string memory _desc,
         string memory _image,
         //address payable _beneficiary,
-        uint256 _goalAmount,
-        uint256 _deadline
+        uint256 _goalAmount
     ) external onlyBeneficiary returns (uint256) {
         // require(
         //     beneficiaries[msg.sender].Address == _beneficiary,
         //     "Only beneficiary can create a project."
         // );
-        require(_deadline < block.timestamp, "The deadline should be a date in the future.");
-        
 
         CharityProject memory project;
         project.name = beneficiaries[msg.sender].name;
@@ -371,7 +368,6 @@ contract TransparentCharity {
         project.beneficiary = payable(msg.sender);
         project.goalAmount = _goalAmount;
         project.currentAmount = 0;
-        project.deadline = _deadline;
         project.isActive = false;
         uint256 projectId = charityProjects.length;
         charityProjects.push(project);
@@ -591,7 +587,6 @@ contract TransparentCharity {
             string memory,
             uint256,
             uint256,
-            uint256,
             address,
             bool
         )
@@ -607,7 +602,6 @@ contract TransparentCharity {
             project.image,
             project.goalAmount,
             project.currentAmount,
-            project.deadline,
             project.beneficiary,
             project.isActive
         );
