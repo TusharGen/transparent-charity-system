@@ -1,7 +1,7 @@
 function Validation(values) {
     let error = {}
     const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const password_pattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const password_pattern = /^.*$/;
     if (values.email === "")
         error.email = "Email should not be empty"
     else if (!email_pattern.test(values.email))
