@@ -2,7 +2,7 @@
 module.exports = {
   solidity: {
     version: '0.8.17',
-    defaultNetworks:'sepolia',
+    defaultNetwork:'sepolia',
     networks:{
       hardhat:{},
       sepolia:{
