@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { logo, sun } from '../../assets';
 //import { navlinks } from '../../constants';
-import { dashboard, logout, payment, profile, withdraw } from '../../assets';
+import { dashboard, logout, createCampaign, profile, withdraw } from '../../assets';
 
 const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
   <div className={`w-[48px] h-[48px] rounded-[10px] ${isActive && isActive === name && 'bg-[#2c2f32]'} flex justify-center items-center ${!disabled && 'cursor-pointer'} ${styles}`} onClick={handleClick}>
@@ -17,15 +17,14 @@ const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
 
 const navlinks = [
   {
-    name: 'dashboard',
+    name: 'projects',
     imgUrl: dashboard,
-    link: '/charityorg-dashboard/',
+    link: '/charityorg-dashboard/projects',
   },
   {
-    name: 'payment',
-    imgUrl: payment,
-    link: '/',
-    disabled: true,
+    name: 'approve a project',
+    imgUrl: createCampaign,
+    link: '/charityorg-dashboard/projects-to-approve',
   },
   {
     name: 'withdraw',

@@ -17,17 +17,17 @@ const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
 
 const navlinks = [
   {
-    name: 'dashboard',
+    name: 'projects',
     imgUrl: dashboard,
-    link: '/beneficiary-dashboard/',
+    link: '/beneficiary-dashboard/projects',
   },
   {
-    name: 'campaign',
+    name: 'charityProject',
     imgUrl: createCampaign,
     link: '/beneficiary-dashboard/create-charity-project',
   },
   {
-    name: 'payment',
+    name: 'charity project detail',
     imgUrl: payment,
     link: '/',
     disabled: true,

@@ -7,6 +7,7 @@ import { money } from '../../assets';
 import { CustomButton, FormField, Loader } from '../../components';
 import { checkIfImage } from '../../utils';
 
+
 const CreateCharityProject = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +17,6 @@ const CreateCharityProject = () => {
     title: '',
     description: '',
     goalAmount: '', 
-    deadline: '',
     image: ''
   });
 
@@ -32,7 +32,7 @@ const CreateCharityProject = () => {
         setIsLoading(true)
         await createCharityProject({ ...form, goalAmount: ethers.utils.parseUnits(form.goalAmount, 18)})
         setIsLoading(false);
-        navigate('/');
+        navigate('/beneficiary-dashboard');
       } else {
         alert('Provide valid image URL')
         setForm({ ...form, image: '' });
@@ -86,13 +86,13 @@ const CreateCharityProject = () => {
             value={form.goalAmount}
             handleChange={(e) => handleFormFieldChange('goalAmount', e)}
           />
-          <FormField 
+          {/* <FormField 
             labelName="End Date *"
             placeholder="End Date"
             inputType="date"
             value={form.deadline}
             handleChange={(e) => handleFormFieldChange('deadline', e)}
-          />
+          /> */}
         </div>
 
         <FormField 

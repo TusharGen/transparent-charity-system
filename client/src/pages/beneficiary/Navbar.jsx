@@ -25,11 +25,14 @@ const Navbar = () => {
       <div className="sm:flex hidden flex-row justify-end gap-4">
         <CustomButton 
           btnType="button"
-          title={address ? 'Create a campaign' : 'Connect'}
+          title={address ? 'Create a Charity Project' : 'Connect'}
           styles={address ? 'bg-[#1dc071]' : 'bg-[#8c6dfd]'}
           handleClick={() => {
-            if(address) navigate('create-campaign')
-            else connect()
+            if(address) navigate('create-charity-project')
+            else{
+              connect();
+              console.log('wallet connected');
+            }
           }}
         />
 
@@ -80,11 +83,14 @@ const Navbar = () => {
             <div className="flex mx-4">
             <CustomButton 
               btnType="button"
-              title={address ? 'Create a campaign' : 'Connect'}
+              title={address ? 'Create a Charity Project' : 'Connect'}
               styles={address ? 'bg-[#1dc071]' : 'bg-[#8c6dfd]'}
               handleClick={() => {
-                if(address) navigate('create-campaign')
-                else connect();
+                if(address) navigate('create-charity-project')
+                else{
+                  connect();
+                  console.log('wallet connected');
+                }
               }}
             />
             </div>
