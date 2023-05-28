@@ -20,12 +20,16 @@ export const StateContextProvider = ({ children }) => {
   };
 
   const [charityOrg, setCharityOrg] = useState(null);
+  const [cooperativeStore, setCooperativeStore] = useState(null);
   const [beneficiaryDetails, setBeneficiaryDetails] = useState(null);
   const [donorDetails, setDonorDetails] = useState(null);
   const [allProjects, setAllProjects] = useState([]);
+  const [product, setProduct] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const [approvedProjects, setApprovedProjects] = useState([]);
   const [donators, setDonators] = useState([]);
   const [donorTransactions, setDonorTransactions] = useState([]);
+  const [beneficiaryTransactions, setBeneficiaryTransactions] = useState([]);
 
   const createCharityProject = async (form) => {
     try {
@@ -41,6 +45,20 @@ export const StateContextProvider = ({ children }) => {
       console.log("createCharityProject failure", error);
     }
   };
+
+  const addProduct = async (form) => {
+    try {
+      const data = await contract.addProduct(
+        form.productId,
+        form.productName,
+        form.price
+      );
+      await data.wait();
+      console.log("addProduct success", data);
+    } catch (error) {
+      console.log("addProduct failure", error);
+    }
+  }
 
   const createBeneficiaryAccount = async (form) => {
     console.log(form);
@@ -86,6 +104,17 @@ export const StateContextProvider = ({ children }) => {
     }
   };
 
+  const createCooperativeStore = async(form)=>{
+    try {
+      const { storeName } = form;
+      const transaction = await contract.createCooperativeStore(storeName);
+      await transaction.wait();
+      console.log("createCooperativeStore success");
+    }catch(error){
+      console.log('createCooperativeStore failure',error);
+    }
+  }
+
   const approveBeneficiaryProject = async (projectId) => {
     try {
       const transaction = await contract.approveBeneficiaryProject(
@@ -110,6 +139,17 @@ export const StateContextProvider = ({ children }) => {
 
   }
 
+  const spendTokens = async (productId, amount) => {
+    try {
+      const transaction = await contract.spendTokens(productId, {value: amount});
+      await transaction.wait();
+      console.log(`${productId}th product is bought!`);
+      return transaction;
+    } catch (error) {
+      console.log("spendTokens failure", error);
+    }
+  }
+
   const getDonorTransactionHistory = async()=>{
     try{
       const data = await contract.getDonorTransactionHistory();
@@ -118,6 +158,17 @@ export const StateContextProvider = ({ children }) => {
       
     }catch (error) {
       console.log("getDonorTransactionHistory failure", error);
+    }
+  }
+
+  const getBeneficiaryTransactionHistory = async()=>{
+    try{
+      const data = await contract.getBeneficiaryTransactionHistory();
+      console.log('getBeneficiaryTransactionHistory success', data);
+      setBeneficiaryTransactions(data);
+      
+    }catch (error) {
+      console.log("getBeneficiaryTransactionHistory failure", error);
     }
   }
 
@@ -130,6 +181,45 @@ export const StateContextProvider = ({ children }) => {
       console.log(error);
     }
   };
+
+  const getCooperativeStoreDetails = async () => {
+    try {
+      const accountStore = await contract.cooperativeStore();
+      console.log('getCooperativeStoreDetails success',accountStore);
+      setCooperativeStore(accountStore);
+    } catch (error) {
+      console.log('getCooperativeStoreDetails failure',error);
+    }
+  }
+
+  const getProduct = async (productId) => {
+    try {
+      const prod = await contract.getProduct(productId);
+      console.log('getProduct success',prod);
+      setProduct(prod);
+    } catch (error) {
+      console.log('getProduct failure',error);
+    }
+  }
+
+  const getAllProducts = async () => {
+    try {
+      const prod = await contract.getAllProducts();
+      console.log('getAllProducts success',prod);
+
+      const productsData = prod.map((projectArray) => ({
+        productId: projectArray[0],
+        productName: projectArray[1],
+        price: projectArray[2],
+      }));
+      // productsData.push(project);
+      setAllProducts(productsData);
+
+    } catch (error) {
+      console.log('getAllProducts failure',error);
+    }
+  }
+
 
   const getBeneficiaryDetails = async () => {
     try {
@@ -248,23 +338,34 @@ export const StateContextProvider = ({ children }) => {
         createBeneficiaryAccount,
         createDonorAccount,
         createOrganization,
+        createCooperativeStore,
         donateToProject,
+        spendTokens,
         getBeneficiaryDetails,
         getApprovedProjects,
         getCharityProjects,
         getOrganization,
+        getCooperativeStoreDetails,
         getDonorDetails,
         getDonorTransactionHistory,
+        getBeneficiaryTransactionHistory,
         getProjectStatus,
         getProjectDonators,
+        getProduct,
+        getAllProducts,
         approveBeneficiaryProject,
+        addProduct,
         beneficiaryDetails,
         donorDetails,
         donorTransactions,
+        beneficiaryTransactions,
         allProjects,
         approvedProjects,
         charityOrg,
-        donators
+        cooperativeStore,
+        donators,
+        product,
+        allProducts
       }}
     >
       {children}

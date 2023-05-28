@@ -22,16 +22,14 @@ const navlinks = [
     link: '/store-dashboard/projects',
   },
   {
-    name: 'payment',
+    name: 'products',
     imgUrl: payment,
-    link: '/',
-    disabled: true,
+    link: '/store-dashboard/products',
   },
   {
-    name: 'withdraw',
+    name: 'add-product',
     imgUrl: withdraw,
-    link: '/',
-    disabled: true,
+    link: '/store-dashboard/add-product', 
   },
   {
     name: 'profile',

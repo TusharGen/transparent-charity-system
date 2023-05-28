@@ -27,17 +27,16 @@ const navlinks = [
     link: '/beneficiary-dashboard/create-charity-project',
   },
   {
-    name: 'charity project detail',
+    name: 'products',
     imgUrl: payment,
-    link: '/',
-    disabled: true,
+    link: '/beneficiary-dashboard/products',
   },
-  {
-    name: 'withdraw',
-    imgUrl: withdraw,
-    link: '/',
-    disabled: true,
-  },
+  // {
+  //   name: 'withdraw',
+  //   imgUrl: withdraw,
+  //   link: '/',
+  //   disabled: true,
+  // },
   {
     name: 'profile',
     imgUrl: profile,

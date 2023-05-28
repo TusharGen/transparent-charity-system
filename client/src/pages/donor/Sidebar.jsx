@@ -22,17 +22,16 @@ const navlinks = [
     link: '/donor-dashboard/projects',
   },
   {
-    name: 'payment',
+    name: 'products',
     imgUrl: payment,
-    link: '/',
-    disabled: true,
+    link: '/donor-dashboard/products',
   },
-  {
-    name: 'withdraw',
-    imgUrl: withdraw,
-    link: '/',
-    disabled: true,
-  },
+  // {
+  //   name: 'withdraw',
+  //   imgUrl: withdraw,
+  //   link: '/',
+  //   disabled: true,
+  // },
   {
     name: 'profile',
     imgUrl: profile,

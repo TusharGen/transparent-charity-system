@@ -15,6 +15,8 @@ const CreateBeneficiaryAccount = () => {
     createBeneficiaryAccount,
     getBeneficiaryDetails,
     beneficiaryDetails,
+    getBeneficiaryTransactionHistory,
+    beneficiaryTransactions,
   } = useStateContext();
 
   const [form, setForm] = useState({
@@ -37,6 +39,7 @@ const CreateBeneficiaryAccount = () => {
 
   useEffect(() => {
     getBeneficiaryDetails();
+    getBeneficiaryTransactionHistory();
   }, []);
 
   return (
@@ -73,6 +76,31 @@ const CreateBeneficiaryAccount = () => {
                       <b className="text-[#1dc071]">Balance :</b> {beneficiaryDetails.balance.toString()}
                     </h3>
                   </div>
+                </div>
+              </div>
+              <div className="mt-5 justify-center ">
+                <h4 className="font-epilogue font-semibold text-[18px] text-[#1dc071] uppercase">
+                  Transaction History
+                </h4>
+
+                <div className="mt-1 flex flex-row gap-4">
+                  {beneficiaryTransactions.length > 0 ? (
+                    beneficiaryTransactions.map((item, index) => (
+                      <div
+                        key={`${item}-${index}`}
+                        className="flex justify-between items-center gap-4"
+                      >
+                        <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] break-ll">
+                          {index + 1}. {ethers.utils.formatUnits(item)} Eth
+                        </p>
+                        {/* <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] break-ll">{item.donation}</p> */}
+                      </div>
+                    ))
+                  ) : (
+                    <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">
+                      No beneficiaryTransactions yet.
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
