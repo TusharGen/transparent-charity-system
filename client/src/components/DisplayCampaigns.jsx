@@ -1,15 +1,21 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 
 import FundCard from './FundCard';
 import { loader } from '../assets';
 
 const DisplayCampaigns = ({ title, isLoading, charityProjects }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const dashboardPath = location.pathname.split('/')[1];
 
-  const handleNavigate = (charityProject) => {
-    navigate(`/charityproject-details/${charityProject.title}`, { state: charityProject })
-  }
+  const handleNavigate = (projectId, charityProject, dashboardPath) => {
+    navigate(`${dashboardPath}/charityproject-details/${projectId}`, {
+      state: { projectId, charityProject }
+    });
+  };
+  
   
   return (
     <div>
@@ -30,7 +36,7 @@ const DisplayCampaigns = ({ title, isLoading, charityProjects }) => {
           key={id}
           {...charityProject}
           projectId={id}
-          handleClick={() => handleNavigate(charityProject)}
+          handleClick={() => handleNavigate(id, charityProject, `/${dashboardPath}`)}
         />)}
       </div>
     </div>

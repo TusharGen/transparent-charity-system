@@ -30,19 +30,19 @@ const App = () => {
 
           <Route path="/donor-dashboard/*" element={<DonorDashLayout />}>
             <Route path="projects" element={<AllProjects />} />
-            <Route path="campaign-details/:id" element={<CampaignDetails />} />
+            <Route path="charityproject-details/:id" element={<CampaignDetails />} />
             <Route path="profile" element={<DonorProfile />} />
           </Route>
 
           <Route path="/store-dashboard/*" element={<StoreDashLayout />}>
             <Route path="projects" element={<AllProjects />} />
-            <Route path="campaign-details/:id" element={<CampaignDetails />} />
+            <Route path="charityproject-details/:id" element={<CampaignDetails />} />
             <Route path="profile" element={<StoreProfile />} />
           </Route>
           
           <Route path="/charityorg-dashboard/*" element={<OrgDashLayout />}>
             <Route path="projects" element={<AllProjects />} />
-            <Route path="campaign-details/:id" element={<CampaignDetails />} />
+            <Route path="charityproject-details/:id" element={<CampaignDetails />} />
             <Route path="projects-to-approve" element={<ProjectsToApprove />} />
             <Route path="profile" element={<OrgProfile />} />
           </Route>

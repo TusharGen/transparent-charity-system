@@ -21,8 +21,11 @@ export const StateContextProvider = ({ children }) => {
 
   const [charityOrg, setCharityOrg] = useState(null);
   const [beneficiaryDetails, setBeneficiaryDetails] = useState(null);
+  const [donorDetails, setDonorDetails] = useState(null);
   const [allProjects, setAllProjects] = useState([]);
   const [approvedProjects, setApprovedProjects] = useState([]);
+  const [donators, setDonators] = useState([]);
+  const [donorTransactions, setDonorTransactions] = useState([]);
 
   const createCharityProject = async (form) => {
     try {
@@ -55,6 +58,21 @@ export const StateContextProvider = ({ children }) => {
     }
   };
 
+  const createDonorAccount = async (form) => {
+    console.log(form);
+    try {
+      const { name } = form;
+      const transaction = await contract.createDonorAccount(
+        name
+      );
+      await transaction.wait();
+
+      console.log("createDonorAccount success");
+    } catch (error) {
+      console.log("createDonorAccount failure", error);
+    }
+  };
+
   const createOrganization = async (form) => {
     console.log(form);
     try {
@@ -80,6 +98,28 @@ export const StateContextProvider = ({ children }) => {
       console.log("approveBeneficiaryProject failure", error);
     }
   };
+
+  const donateToProject = async (projectId, amount) => {
+    try{
+      const data = await contract.donateToProject(projectId, { value: ethers.utils.parseEther(amount)});
+      console.log('donateToProject success', data);
+    return data;
+    }catch (error) {
+      console.log("donateToProject failure", error);
+    }
+
+  }
+
+  const getDonorTransactionHistory = async()=>{
+    try{
+      const data = await contract.getDonorTransactionHistory();
+      console.log('getDonorTransactionHistory success', data);
+      setDonorTransactions(data);
+      
+    }catch (error) {
+      console.log("getDonorTransactionHistory failure", error);
+    }
+  }
 
   const getOrganization = async () => {
     try {
@@ -110,6 +150,26 @@ export const StateContextProvider = ({ children }) => {
       });
     } catch (error) {
       console.log("getBeneficiaryDetails failure", error);
+    }
+  };
+
+  const getDonorDetails = async () => {
+    try {
+      const data = await contract.getDonorDetails();
+      const [name,  balance, Address] = data;
+
+      console.log("getDonorDetails success");
+      console.log("Name:", name);
+      console.log("Address:", Address);
+      console.log("Balance:", balance.toString());
+
+      setDonorDetails({
+        name,
+        balance,
+        Address
+      });
+    } catch (error) {
+      console.log("getDonorDetails failure", error);
     }
   };
 
@@ -161,24 +221,22 @@ export const StateContextProvider = ({ children }) => {
     try {
       const data = await contract.getProjectStatus();
       console.log(data);
-      // const [name, rescueInformation, Address, balance] = data;
-
-      // console.log("getBeneficiaryDetails success");
-      // console.log("Name:", name);
-      // console.log("Rescue Information:", rescueInformation);
-      // console.log("Address:", Address);
-      // console.log("Balance:", balance.toString());
-
-      // setBeneficiaryDetails({
-      //   name,
-      //   rescueInformation,
-      //   Address,
-      //   balance,
-      // });
     } catch (error) {
       console.log("getProjectStaus failure", error);
     }
   }
+
+  const getProjectDonators = async (projectId)=>{
+    try{
+      const data = await contract.getProjectDonators(projectId);
+      console.log('getProjectDonators success',data);
+      setDonators(data);
+    }catch(error){
+      console.log('getProjectDonators failure',error);
+    }
+  }
+
+
 
   return (
     <StateContext.Provider
@@ -188,17 +246,25 @@ export const StateContextProvider = ({ children }) => {
         connect,
         createCharityProject,
         createBeneficiaryAccount,
+        createDonorAccount,
         createOrganization,
+        donateToProject,
         getBeneficiaryDetails,
         getApprovedProjects,
         getCharityProjects,
         getOrganization,
+        getDonorDetails,
+        getDonorTransactionHistory,
         getProjectStatus,
+        getProjectDonators,
         approveBeneficiaryProject,
         beneficiaryDetails,
+        donorDetails,
+        donorTransactions,
         allProjects,
         approvedProjects,
         charityOrg,
+        donators
       }}
     >
       {children}
