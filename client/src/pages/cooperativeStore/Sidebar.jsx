@@ -17,9 +17,9 @@ const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
 
 const navlinks = [
   {
-    name: 'dashboard',
+    name: 'projects',
     imgUrl: dashboard,
-    link: '/store-dashboard/',
+    link: '/store-dashboard/projects',
   },
   {
     name: 'payment',

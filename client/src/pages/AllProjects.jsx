@@ -5,14 +5,13 @@ import { useStateContext } from '../context'
 
 const AllProjects = () => {
   const [isLoading, setIsLoading] = useState(false); 
-  const [charityProjects, setCharityProjects] = useState([]);
+  
 
-  const { address, contract, getApprovedProjects } = useStateContext();
+  const { address, contract, getApprovedProjects, approvedProjects } = useStateContext();
 
   const fetchCampaigns = async () => {
     setIsLoading(true);
-    const data = await getApprovedProjects();
-    setCharityProjects(data);
+    getApprovedProjects();
     setIsLoading(false);
   }
 
@@ -22,9 +21,9 @@ const AllProjects = () => {
 
   return (
     <DisplayCampaigns 
-      title="Approved Charity Projects"
+      title="Charity Projects"
       isLoading={isLoading}
-      charityProjects={charityProjects}
+      charityProjects={approvedProjects}
     />
   )
 }

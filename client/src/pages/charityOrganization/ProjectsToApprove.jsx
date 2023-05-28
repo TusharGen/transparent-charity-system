@@ -5,7 +5,7 @@ import { useStateContext } from '../../context'
 
 const AllProjects = () => {
   const [isLoading, setIsLoading] = useState(false); 
-  const [charityProjects, setCharityProjects] = useState([]);
+  //const [charityProjects, setCharityProjects] = useState([]);
 
   const { address, contract, allProjects, getCharityProjects } = useStateContext();
 
