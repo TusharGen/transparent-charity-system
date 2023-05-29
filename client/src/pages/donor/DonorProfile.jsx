@@ -65,7 +65,7 @@ const CreateDonorAccount = () => {
                 <div className="w-2/3">
                   <div className="card-body text-[#808191] m-1 ">
                     <h4 className="card-title m-1 ">
-                      <b className="text-[#1dc071]">Name :</b>
+                      <b className="text-[#1dc071] mr-1">Name :</b>
                       {donorDetails.name.toString()}
                     </h4>
                     <p className="card-text2 m-1">
