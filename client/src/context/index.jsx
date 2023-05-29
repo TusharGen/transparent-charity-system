@@ -1,6 +1,7 @@
 import React, { useContext, createContext, useState } from "react";
 import { ethers } from "ethers";
 import { abi } from "../constants";
+import { useMetamask, useAddress } from "@thirdweb-dev/react";
 
 const StateContext = createContext();
 
@@ -10,14 +11,9 @@ export const StateContextProvider = ({ children }) => {
   const signer = provider.getSigner();
   const contract = new ethers.Contract(contractAddress, abi, signer);
 
-  const address = provider.getSigner().getAddress();
-  const connect = async () => {
-    try {
-      await window.ethereum.request({ method: "eth_requestAccounts" });
-    } catch (error) {
-      console.log("Failed to connect to Metamask:", error);
-    }
-  };
+  //const address = provider.getSigner().getAddress();
+  const address = useAddress();
+  const connect = useMetamask();
 
   const [charityOrg, setCharityOrg] = useState(null);
   const [cooperativeStore, setCooperativeStore] = useState(null);
