@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { ethers } from "ethers";
 import thirdweb from "../assets/thirdweb.png";
@@ -7,12 +7,13 @@ import CustomButton from "./CustomButton";
 import Loader from "./Loader";
 
 import { useStateContext } from "../context";
+import imagee from '../assets/products/product_0.jpg'
 
 const ProductCard = ({ productId, productName, price }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-
-  const image = `${process.env.PUBLIC_URL}assets/products/product_${productId}.jpg`;
+  const [imageSrc, setImageSrc] = useState(null);
+  // const image = `${imagee}_${productId}.jpg`;
 
   const { spendTokens } = useStateContext();
 
@@ -29,6 +30,21 @@ const ProductCard = ({ productId, productName, price }) => {
     setIsLoading(false);
   };
 
+  useEffect(() => {
+    // Dynamically import image
+    import(`../assets/products/product_${productId}.jpg`)
+      .then((image) => {
+        setImageSrc(image.default);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [productId]);
+
+  if (!imageSrc) {
+    return "product";
+  }
+
   return (
     <>
       {isLoading && <Loader />}
@@ -36,11 +52,13 @@ const ProductCard = ({ productId, productName, price }) => {
         className="sm:w-[288px] w-full rounded-[15px] bg-[#1c1c24] "
         // onClick={handleClick}
       >
-        {/* <img
-          src={image}
+        <img
+           src={imageSrc}
+          //src='../assets/products/product_0.jpg'
           alt="product"
+          // alt="React Image"
           className="w-full h-[158px] object-cover rounded-[15px]"
-        /> */}
+        />
 
         <div className="flex flex-col p-4">
           <div className="flex flex-row items-center mb-[18px]">
