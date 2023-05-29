@@ -31,9 +31,6 @@ function Login() {
                     else if (res.data === "charity") {
                         navigate('/charityorg-dashboard/')
                     }
-                    else if (res.data === "Success") {
-                        navigate('/home');
-                    }
                     else {
                         alert("Wrong email or password")
                     }

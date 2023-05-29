@@ -28,7 +28,7 @@ function Signup() {
                         alert("Internal Server Error");
                     }
                     else {
-                        navigate('/');
+                        navigate('/login');
                     }
                 })
                 .catch(err => console.log(err));
@@ -74,7 +74,7 @@ function Signup() {
 
                     <button type='submit' className='btn btn-success w-100 rounded-0 rounded-pill' style={{ backgroundColor: '#4ACD8D' }}>Sign Up</button>
                     <p style={{ color: 'white' }}>You agree to out terms and policies.</p>
-                    <Link to="/" className='btn btn-default border w-100 bg-light rounded-0 rounded-pill'>Login</Link>
+                    <Link to="/login" className='btn btn-default border w-100 bg-light rounded-0 rounded-pill'>Login</Link>
                 </form>
             </div>
         </div>
