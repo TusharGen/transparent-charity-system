@@ -53,7 +53,7 @@ const CreateDonorAccount = () => {
       {donorDetails ? (
         <div>
           <div className="beneficiary-container m-5">
-            <div className="card mb-3">
+            <div className="card mb-3 bg-[#1c1c24] border-0">
               <div className="flex">
                 <div className="w-1/3">
                   <img

@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600&display=swap');
+
+:root {
+  --color-primary: #1dc071;
+  --color-secondary: #2c2f32;
+}
+
+.landing-page {
+  font-family: 'Epilogue', Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--color-secondary);
+  color: #fff;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+  font-size: 36px;
+  color: var(--color-primary);
+}
+
+h2 {
+  font-size: 24px;
+  color: #ccc;
+}
+
+.how-it-works {
+  margin-bottom: 40px;
+}
+
+.how-it-works h3 {
+  font-size: 28px;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+}
+
+.how-it-works ol {
+  list-style-type: decimal;
+  margin-left: 30px;
+}
+
+.join-community {
+  margin-bottom: 40px;
+}
+
+.join-community h3 {
+  font-size: 28px;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+}
+
+.join-community ul {
+  list-style-type: disc;
+  margin-left: 30px;
+}
+
+.get-started {
+  text-align: center;
+}
+
+.get-started h3 {
+  font-size: 28px;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+}
+
+.get-started p {
+  font-size: 16px;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.sign-up-btn, .learn-more-btn {
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.learn-more-btn {
+  background-color: #555;
+}
