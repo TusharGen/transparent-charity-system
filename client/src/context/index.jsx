@@ -306,7 +306,7 @@ export const StateContextProvider = ({ children }) => {
   const getProjectStatus = async (projectId)=>{
     try {
       const data = await contract.getProjectStatus();
-      console.log(data);
+      console.log('Project Status',data);
     } catch (error) {
       console.log("getProjectStaus failure", error);
     }

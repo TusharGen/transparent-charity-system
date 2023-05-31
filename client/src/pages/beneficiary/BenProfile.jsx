@@ -91,7 +91,7 @@ const CreateBeneficiaryAccount = () => {
                         className="flex justify-between items-center gap-4"
                       >
                         <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] break-ll">
-                          {index + 1}. {ethers.utils.formatUnits(item)} Eth
+                          {index + 1}. {ethers.utils.formatUnits(item)} Eth 
                         </p>
                         {/* <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] break-ll">{item.donation}</p> */}
                       </div>

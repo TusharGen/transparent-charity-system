@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
 import thirdweb from "../assets/thirdweb.png";
 import { tagType, tick } from "../assets";
@@ -14,7 +14,7 @@ const ProductCard = ({ productId, productName, price }) => {
   const [success, setSuccess] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
   // const image = `${imagee}_${productId}.jpg`;
-
+  const navigate= useNavigate();
   const { spendTokens } = useStateContext();
 
   const location = useLocation();
