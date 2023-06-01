@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { CampaignDetails, Home } from "./pages";
+import { CampaignDetails } from "./pages";
 import CreateCharityProject from './pages/beneficiary/CreateCharityProject';
 import AllProjects from './pages/AllProjects';
 import AllProducts from "./pages/AllProducts";
@@ -21,10 +21,12 @@ import AddProducts from "./pages/cooperativeStore/AddProducts";
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 
+import LandingPage from './LandingPage';
+
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<LandingPage/>} />
 
       <Route path="/login" element={<Login />} />
 
