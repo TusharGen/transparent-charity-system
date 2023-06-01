@@ -49,7 +49,7 @@ const CreateOrganization = () => {
         </h1>
       </div>
 
-      {charityOrg && charityOrg.length !== 0? (
+      {charityOrg && charityOrg.OrgName !== '' ? (
         <div >
           <div className="beneficiary-container m-5">
             <div className="card mb-3 bg-[#1c1c24] border-0">

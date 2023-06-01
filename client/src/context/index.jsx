@@ -6,7 +6,7 @@ import { useMetamask, useAddress } from "@thirdweb-dev/react";
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
-  const contractAddress = "0xdDEFedB132Fe6f745166aAD499Ece21d805cC6E4";
+  const contractAddress = "0x2988aEe923608a79B6B73815f8aFE80De1Aeff06";
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(contractAddress, abi, signer);
@@ -100,14 +100,14 @@ export const StateContextProvider = ({ children }) => {
     }
   };
 
-  const createCooperativeStore = async(form)=>{
+  const createCooperativeStore = async (form) => {
     try {
       const { storeName } = form;
       const transaction = await contract.createCooperativeStore(storeName);
       await transaction.wait();
       console.log("createCooperativeStore success");
-    }catch(error){
-      console.log('createCooperativeStore failure',error);
+    } catch (error) {
+      console.log('createCooperativeStore failure', error);
     }
   }
 
@@ -125,11 +125,11 @@ export const StateContextProvider = ({ children }) => {
   };
 
   const donateToProject = async (projectId, amount) => {
-    try{
-      const data = await contract.donateToProject(projectId, { value: ethers.utils.parseEther(amount)});
+    try {
+      const data = await contract.donateToProject(projectId, { value: ethers.utils.parseEther(amount) });
       console.log('donateToProject success', data);
-    return data;
-    }catch (error) {
+      return data;
+    } catch (error) {
       console.log("donateToProject failure", error);
     }
 
@@ -137,7 +137,7 @@ export const StateContextProvider = ({ children }) => {
 
   const spendTokens = async (productId, amount) => {
     try {
-      const transaction = await contract.spendTokens(productId, {value: amount});
+      const transaction = await contract.spendTokens(productId, { value: amount });
       await transaction.wait();
       console.log(`${productId}th product is bought!`);
       return transaction;
@@ -146,24 +146,24 @@ export const StateContextProvider = ({ children }) => {
     }
   }
 
-  const getDonorTransactionHistory = async()=>{
-    try{
+  const getDonorTransactionHistory = async () => {
+    try {
       const data = await contract.getDonorTransactionHistory();
       console.log('getDonorTransactionHistory success', data);
       setDonorTransactions(data);
-      
-    }catch (error) {
+
+    } catch (error) {
       console.log("getDonorTransactionHistory failure", error);
     }
   }
 
-  const getBeneficiaryTransactionHistory = async()=>{
-    try{
+  const getBeneficiaryTransactionHistory = async () => {
+    try {
       const data = await contract.getBeneficiaryTransactionHistory();
       console.log('getBeneficiaryTransactionHistory success', data);
       setBeneficiaryTransactions(data);
-      
-    }catch (error) {
+
+    } catch (error) {
       console.log("getBeneficiaryTransactionHistory failure", error);
     }
   }
@@ -181,27 +181,27 @@ export const StateContextProvider = ({ children }) => {
   const getCooperativeStoreDetails = async () => {
     try {
       const accountStore = await contract.cooperativeStore();
-      console.log('getCooperativeStoreDetails success',accountStore);
+      console.log('getCooperativeStoreDetails success', accountStore);
       setCooperativeStore(accountStore);
     } catch (error) {
-      console.log('getCooperativeStoreDetails failure',error);
+      console.log('getCooperativeStoreDetails failure', error);
     }
   }
 
   const getProduct = async (productId) => {
     try {
       const prod = await contract.getProduct(productId);
-      console.log('getProduct success',prod);
+      console.log('getProduct success', prod);
       setProduct(prod);
     } catch (error) {
-      console.log('getProduct failure',error);
+      console.log('getProduct failure', error);
     }
   }
 
   const getAllProducts = async () => {
     try {
       const prod = await contract.getAllProducts();
-      console.log('getAllProducts success',prod);
+      console.log('getAllProducts success', prod);
 
       const productsData = prod.map((projectArray) => ({
         productId: projectArray[0],
@@ -212,7 +212,7 @@ export const StateContextProvider = ({ children }) => {
       setAllProducts(productsData);
 
     } catch (error) {
-      console.log('getAllProducts failure',error);
+      console.log('getAllProducts failure', error);
     }
   }
 
@@ -242,7 +242,7 @@ export const StateContextProvider = ({ children }) => {
   const getDonorDetails = async () => {
     try {
       const data = await contract.getDonorDetails();
-      const [name,  balance, Address] = data;
+      const [name, balance, Address] = data;
 
       console.log("getDonorDetails success");
       console.log("Name:", name);
@@ -303,22 +303,22 @@ export const StateContextProvider = ({ children }) => {
     }
   };
 
-  const getProjectStatus = async (projectId)=>{
+  const getProjectStatus = async (projectId) => {
     try {
       const data = await contract.getProjectStatus();
-      console.log('Project Status',data);
+      console.log('Project Status', data);
     } catch (error) {
       console.log("getProjectStaus failure", error);
     }
   }
 
-  const getProjectDonators = async (projectId)=>{
-    try{
+  const getProjectDonators = async (projectId) => {
+    try {
       const data = await contract.getProjectDonators(projectId);
-      console.log('getProjectDonators success',data);
+      console.log('getProjectDonators success', data);
       setDonators(data);
-    }catch(error){
-      console.log('getProjectDonators failure',error);
+    } catch (error) {
+      console.log('getProjectDonators failure', error);
     }
   }
 
